@@ -1,0 +1,699 @@
+
+/* ===================================================
+   ОБЩИЕ НАСТРОЙКИ СТРАНИЦЫ
+   =================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f8f4;
+  color: #222222;
+}
+
+/* цвета, которые используются в нескольких местах,
+   чтобы не писать один и тот же код каждый раз */
+:root {
+  --green: #2e8b57;
+  --green-dark: #1f6b41;
+  --light-green: #e5f3ea;
+  --border-color: #d9e6dd;
+  --red: #e05a5a;
+  --orange: #e0a95a;
+  --blue: #4c93d9;
+  --gray-text: #666666;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+
+/* ===================================================
+   ОБЩАЯ СТРУКТУРА (сайдбар + правая часть)
+   =================================================== */
+
+.page-wrapper {
+  display: flex;
+}
+
+/* Левое меню */
+.sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  border-right: 1px solid var(--border-color);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--green-dark);
+  margin-bottom: 30px;
+}
+
+.menu-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  margin-bottom: 5px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #444444;
+}
+
+.menu-button:hover {
+  background-color: var(--light-green);
+}
+
+.menu-button.active {
+  background-color: var(--light-green);
+  color: var(--green-dark);
+  font-weight: bold;
+}
+
+/* Правая часть страницы */
+.main-content {
+  flex: 1;
+  padding: 25px 30px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 300px;
+  font-size: 14px;
+}
+
+.user-info {
+  font-weight: bold;
+  color: var(--green-dark);
+}
+
+/* каждая "страница" внутри сайта, показываем только одну за раз */
+.section {
+  display: none;
+}
+
+.section.visible {
+  display: block;
+}
+
+.page-heading {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: var(--green-dark);
+}
+
+.page-description {
+  color: var(--gray-text);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+
+/* ===================================================
+   ПРИВЕТСТВЕННЫЙ БЛОК НА ГЛАВНОЙ
+   =================================================== */
+
+.welcome-box {
+  background-color: var(--light-green);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.welcome-box h2 {
+  margin: 0 0 8px 0;
+  color: var(--green-dark);
+}
+
+.welcome-box p {
+  margin: 0;
+  color: var(--gray-text);
+  max-width: 400px;
+}
+
+.welcome-photo {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+
+
+/* ===================================================
+   КАРТОЧКИ (простой белый блок с рамкой)
+   =================================================== */
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--green-dark);
+  font-size: 16px;
+}
+
+.two-columns {
+  display: flex;
+  gap: 20px;
+}
+
+.two-columns .left {
+  flex: 2;
+}
+
+.two-columns .right {
+  flex: 1;
+}
+
+
+/* ===================================================
+   ЧИСЛОВЫЕ ПОКАЗАТЕЛИ (вместо круглых диаграмм)
+   =================================================== */
+
+.numbers-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.number-box {
+  flex: 1;
+  min-width: 130px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #fafafa;
+}
+
+.number-box .label {
+  font-size: 12px;
+  color: var(--gray-text);
+  margin-bottom: 6px;
+}
+
+.number-box .value {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.number-box .small-text {
+  font-size: 12px;
+  color: #999999;
+  font-weight: normal;
+}
+
+.progress-line {
+  height: 4px;
+  background-color: #e5e5e5;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+
+.progress-line-fill {
+  height: 4px;
+  border-radius: 3px;
+}
+
+
+/* ===================================================
+   СПИСОК ПРИЁМОВ ПИЩИ
+   =================================================== */
+
+.meal-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.meal-item:last-child {
+  border-bottom: none;
+}
+
+.meal-letter {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: var(--light-green);
+  color: var(--green-dark);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.meal-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.meal-info {
+  font-size: 12px;
+  color: var(--gray-text);
+}
+
+.meal-time {
+  margin-left: auto;
+  font-size: 12px;
+  color: #999999;
+}
+
+.empty-message {
+  color: #999999;
+  font-size: 13px;
+  padding: 10px 0;
+}
+
+
+/* ===================================================
+   КНОПКИ
+   =================================================== */
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.btn-green {
+  background-color: var(--green);
+  color: #ffffff;
+  width: 100%;
+}
+
+.btn-outline {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  color: #333333;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.quick-link {
+  display: block;
+  padding: 10px 12px;
+  background-color: #fafafa;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.quick-link:hover {
+  background-color: var(--light-green);
+}
+
+.tip-box {
+  background-color: var(--light-green);
+  border-left: 4px solid var(--green);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 13px;
+}
+
+
+/* ===================================================
+   СТРАНИЦА "РАСЧЕТ КБЖУ"
+   =================================================== */
+
+.form-row {
+  margin-bottom: 14px;
+}
+
+.form-row label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--gray-text);
+  margin-bottom: 5px;
+}
+
+.form-row input,
+.form-row select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.gender-buttons {
+  display: flex;
+}
+
+.gender-buttons button {
+  flex: 1;
+  padding: 9px;
+  border: 1px solid var(--border-color);
+  background-color: #fafafa;
+  font-size: 13px;
+}
+
+.gender-buttons button.selected {
+  background-color: var(--green);
+  color: #ffffff;
+  border-color: var(--green);
+}
+
+.result-box {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.result-box .big-number {
+  font-size: 34px;
+  font-weight: bold;
+  color: var(--green-dark);
+}
+
+
+/* ===================================================
+   СТРАНИЦА "ПРОДУКТЫ"
+   =================================================== */
+
+.own-product-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.own-product-form .form-row {
+  flex: 1;
+  min-width: 140px;
+  margin-bottom: 0;
+}
+
+.category-buttons {
+  margin-bottom: 15px;
+}
+
+.category-buttons button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background-color: #ffffff;
+  font-size: 12px;
+}
+
+.category-buttons button.selected {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: #ffffff;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.product-card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px;
+  background-color: #ffffff;
+}
+
+.product-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.product-letter {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background-color: var(--light-green);
+  color: var(--green-dark);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-name {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.product-category {
+  font-size: 11px;
+  color: #999999;
+}
+
+.product-macros {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--gray-text);
+  margin-bottom: 10px;
+}
+
+.product-macros b {
+  display: block;
+  color: #222222;
+  font-size: 13px;
+}
+
+
+/* ===================================================
+   СТРАНИЦА "МОЙ РАЦИОН"
+   =================================================== */
+
+.diary-totals {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+
+/* ===================================================
+   СТРАНИЦА "СТАТИСТИКА"
+   =================================================== */
+
+.chart-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 180px;
+}
+
+.chart-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.chart-bar {
+  width: 28px;
+  background-color: var(--green);
+  border-radius: 4px 4px 0 0;
+}
+
+.chart-value {
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.chart-label {
+  font-size: 11px;
+  color: #999999;
+  margin-top: 6px;
+}
+
+
+/* ===================================================
+   СТРАНИЦА "НАСТРОЙКИ"
+   =================================================== */
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.toggle {
+  width: 38px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #cccccc;
+  position: relative;
+}
+
+.toggle.on {
+  background-color: var(--green);
+}
+
+.toggle::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  top: 2px;
+  left: 2px;
+}
+
+.toggle.on::after {
+  left: 20px;
+}
+
+
+/* уведомление снизу экрана */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--green-dark);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: none;
+}
+
+.notification.show {
+  display: block;
+}
+
+
+/* ===================================================
+   ЭКРАНЫ "РЕГИСТРАЦИЯ" И "ВХОД"
+   =================================================== */
+
+/* пока пользователь не вошёл, основной сайт скрыт */
+body.auth-locked .page-wrapper {
+  display: none;
+}
+
+.auth-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f2f8f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+/* когда пользователь вошёл, экраны убираются полностью */
+body:not(.auth-locked) .auth-screen {
+  display: none !important;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 30px;
+  margin: auto;
+}
+
+.auth-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+}
+
+.auth-card h2 {
+  margin: 0 0 6px 0;
+  color: var(--green-dark);
+}
+
+.auth-text {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: var(--gray-text);
+}
+
+.auth-error {
+  min-height: 18px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--red);
+}
+
+.auth-switch {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--gray-text);
+}
+
+.auth-switch a {
+  color: var(--green-dark);
+  font-weight: bold;
+}
+
+button.toggle {
+  border: 0;
+  padding: 0;
+}

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutri</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-locked">
+
+<div class="page-wrapper">
+
+  <!-- Левое меню -->
+
+  <div class="sidebar">
+    <div class="logo">Nutri</div>
+
+    <button class="menu-button active" data-page="home" onclick="openPage('home')">Главная</button>
+    <button class="menu-button" data-page="calc" onclick="openPage('calc')">Расчет КБЖУ</button>
+    <button class="menu-button" data-page="products" onclick="openPage('products')">Продукты</button>
+    <button class="menu-button" data-page="diary" onclick="openPage('diary')">Мой рацион</button>
+    <button class="menu-button" data-page="stats" onclick="openPage('stats')">Статистика</button>
+    <button class="menu-button" data-page="settings" onclick="openPage('settings')">Настройки</button>
+    <button class="menu-button" onclick="logout()">Выйти</button>
+  </div>
+
+  <!-- Правая часть -->
+
+  <div class="main-content">
+
+    <div class="top-bar">
+      <input class="search-box" id="productSearch" type="search" placeholder="Поиск продуктов" aria-label="Поиск продуктов">
+      <div class="user-info" id="topUserName">Гость</div>
+    </div>
+
+
+    <!-- Главная -->
+
+    <div class="section visible" id="section-home">
+
+      <div class="welcome-box">
+        <div>
+          <h2 id="welcomeHeading">Добро пожаловать!</h2>
+          <p>Следите за своим питанием, достигайте целей и оставайтесь в форме.</p>
+        </div>
+        <img class="welcome-photo" src="banner.jpg" alt="еда">
+      </div>
+
+      <div class="two-columns">
+        <div class="left">
+
+          <div class="card">
+            <h3>Сегодня</h3>
+            <div class="numbers-row">
+
+              <div class="number-box">
+                <div class="label">Калории</div>
+                <div class="value">0 <span class="small-text">из 0</span></div>
+                <div class="progress-line"><div class="progress-line-fill" style="width:0%; background-color: var(--green);"></div></div>
+              </div>
+
+              <div class="number-box">
+                <div class="label">Белки</div>
+                <div class="value">0 г <span class="small-text">из 0 г</span></div>
+                <div class="progress-line"><div class="progress-line-fill" style="width:0%; background-color: var(--red);"></div></div>
+              </div>
+
+              <div class="number-box">
+                <div class="label">Жиры</div>
+                <div class="value">0 г <span class="small-text">из 0 г</span></div>
+                <div class="progress-line"><div class="progress-line-fill" style="width:0%; background-color: var(--orange);"></div></div>
+              </div>
+
+              <div class="number-box">
+                <div class="label">Углеводы</div>
+                <div class="value">0 г <span class="small-text">из 0 г</span></div>
+                <div class="progress-line"><div class="progress-line-fill" style="width:0%; background-color: var(--blue);"></div></div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Последние приемы пищи</h3>
+            <!-- список приёмов пищи создаётся в JavaScript, см. функцию renderMealList() -->
+            <div id="mealListHome"></div>
+          </div>
+
+        </div>
+
+        <div class="right">
+
+          <div class="card">
+            <h3>Цель на день</h3>
+            <p style="font-size:13px; color: var(--gray-text); margin-top:-8px;"><span id="goalStatus">Не задано</span></p>
+            <div class="numbers-row" style="margin-bottom: 15px;">
+              <div class="number-box"><div class="value" style="font-size:16px;">0</div><div class="label">Ккал</div></div>
+              <div class="number-box"><div class="value" style="font-size:16px;">0 г</div><div class="label">Белки</div></div>
+            </div>
+            <div class="numbers-row" style="margin-bottom: 15px;">
+              <div class="number-box"><div class="value" style="font-size:16px;">0 г</div><div class="label">Жиры</div></div>
+              <div class="number-box"><div class="value" style="font-size:16px;">0 г</div><div class="label">Углеводы</div></div>
+            </div>
+            <button class="btn btn-green" onclick="openPage('calc')">Подробнее</button>
+          </div>
+
+          <div class="card">
+            <h3>Быстрый доступ</h3>
+            <button class="quick-link" onclick="openPage('calc')">Рассчитать КБЖУ</button>
+            <button class="quick-link" onclick="openPage('products')">Добавить продукт</button>
+            <button class="quick-link" onclick="openPage('diary')">Мой рацион</button>
+            <button class="quick-link" onclick="openPage('stats')">Статистика</button>
+          </div>
+
+          <div class="tip-box">
+            <b>Маленькие шаги</b><br>
+            приводят к большим результатам!
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Расчет КБЖУ -->
+
+    <div class="section" id="section-calc">
+      <div class="page-heading">Расчет КБЖУ</div>
+      <div class="page-description">Узнайте свою суточную норму калорий, белков, жиров и углеводов.</div>
+
+      <div class="two-columns">
+        <div class="left card">
+
+          <div class="form-row">
+            <label>Пол</label>
+            <div class="gender-buttons">
+              <button id="genderMale" class="selected">Мужчина</button>
+              <button id="genderFemale">Женщина</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>Возраст, лет</label>
+            <input type="number" id="inputAge" value="30">
+          </div>
+
+          <div class="form-row">
+            <label>Рост, см</label>
+            <input type="number" id="inputHeight" value="178">
+          </div>
+
+          <div class="form-row">
+            <label>Вес, кг</label>
+            <input type="number" id="inputWeight" value="82">
+          </div>
+
+          <div class="form-row">
+            <label>Активность</label>
+            <select id="inputActivity">
+              <option value="1.2">Минимальная</option>
+              <option value="1.375">Легкая (1-3 тренировки в неделю)</option>
+              <option value="1.55" selected>Средняя (3-5 тренировок в неделю)</option>
+              <option value="1.725">Высокая (6-7 тренировок в неделю)</option>
+              <option value="1.9">Очень высокая</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label>Цель</label>
+            <select id="inputGoal">
+              <option value="-0.15">Снижение веса</option>
+              <option value="0" selected>Поддержание веса</option>
+              <option value="0.15">Набор массы</option>
+            </select>
+          </div>
+          <button class="btn btn-green" onclick="saveGoal()">Рассчитать и сохранить цель</button>
+        </div>
+
+        <div class="right card">
+          <h3>Ваш результат</h3>
+          <div class="result-box">
+            <div class="big-number" id="resultCalories">—</div>
+            <div style="color: var(--gray-text); font-size: 13px;">ккал в сутки</div>
+          </div>
+          <div class="numbers-row">
+            <div class="number-box"><div class="label">Белки</div><div class="value" id="resultProtein" style="font-size:16px;">—</div></div>
+            <div class="number-box"><div class="label">Жиры</div><div class="value" id="resultFat" style="font-size:16px;">—</div></div>
+            <div class="number-box"><div class="label">Углеводы</div><div class="value" id="resultCarbs" style="font-size:16px;">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Продукты -->
+
+    <div class="section" id="section-products">
+      <div class="page-heading">Продукты</div>
+      <div class="page-description">База продуктов с КБЖУ на 100 г. Нажмите "Добавить", чтобы занести продукт в рацион.</div>
+
+      <div class="card">
+        <h3>Добавить свой продукт</h3>
+        <div class="own-product-form">
+          <div class="form-row">
+            <label>Название</label>
+            <input type="text" id="ownName" placeholder="Например: Протеиновый батончик">
+          </div>
+          <div class="form-row">
+            <label>Калории (на 100 г)</label>
+            <input type="number" id="ownCalories" placeholder="0">
+          </div>
+          <div class="form-row">
+            <label>Белки, г</label>
+            <input type="number" id="ownProtein" placeholder="0">
+          </div>
+          <div class="form-row">
+            <label>Жиры, г</label>
+            <input type="number" id="ownFat" placeholder="0">
+          </div>
+          <div class="form-row">
+            <label>Углеводы, г</label>
+            <input type="number" id="ownCarbs" placeholder="0">
+          </div>
+        </div>
+        <button class="btn btn-green" style="width:auto;" onclick="addOwnProduct()">Добавить продукт</button>
+      </div>
+
+      <div class="category-buttons" id="categoryButtons"></div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+
+
+    <!-- Мой рацион -->
+
+    <div class="section" id="section-diary">
+      <div class="page-heading">Мой рацион</div>
+      <div class="page-description">Здесь собраны все продукты и блюда, добавленные сегодня.</div>
+
+      <div class="diary-totals">
+        <div class="number-box"><div class="label">Калории</div><div class="value" id="diaryTotalCalories">0</div></div>
+        <div class="number-box"><div class="label">Белки</div><div class="value" id="diaryTotalProtein">0 г</div></div>
+        <div class="number-box"><div class="label">Жиры</div><div class="value" id="diaryTotalFat">0 г</div></div>
+        <div class="number-box"><div class="label">Углеводы</div><div class="value" id="diaryTotalCarbs">0 г</div></div>
+      </div>
+
+      <div class="card">
+        <h3>Приемы пищи</h3>
+        <div id="mealListDiary"></div>
+      </div>
+    </div>
+
+
+    <!-- Статистика  -->
+    <div class="section" id="section-stats">
+      <div class="page-heading">Статистика</div>
+      <div class="page-description">Калории за последние 7 дней.</div>
+
+      <div class="card">
+        <h3>Калорийность по дням</h3>
+        <div class="chart-box" id="weekChart"></div>
+      </div>
+
+      <div class="card">
+        <h3>Средние показатели за неделю</h3>
+        <div class="numbers-row">
+          <div class="number-box">
+            <div class="label">Белки, среднее</div>
+            <div class="value">0 г <span class="small-text">из 0 г</span></div>
+            <div class="progress-line"><div class="progress-line-fill" style="width:0%; background-color: var(--red);"></div></div>
+          </div>
+          <div class="number-box">
+            <div class="label">Жиры, среднее</div>
+            <div class="value">0 г <span class="small-text">из 0 г</span></div>
+            <div class="progress-line"><div class="progress-line-fill" style="width:0%; background-color: var(--orange);"></div></div>
+          </div>
+          <div class="number-box">
+            <div class="label">Углеводы, среднее</div>
+            <div class="value">0 г <span class="small-text">из 0 г</span></div>
+            <div class="progress-line"><div class="progress-line-fill" style="width:0%; background-color: var(--blue);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Настройки -->
+
+    <div class="section" id="section-settings">
+      <div class="page-heading">Настройки</div>
+      <div class="page-description">Профиль и уведомления.</div>
+
+      <div class="two-columns">
+        <div class="left card">
+          <h3>Профиль</h3>
+          <div class="form-row">
+            <label>Имя</label>
+            <input type="text" id="profileName" placeholder="Ваше имя">
+          </div>
+          <div class="form-row">
+            <label>Email</label>
+            <input type="text" id="profileEmail" placeholder="Ваш email">
+          </div>
+          <div class="form-row" id="profilePasswordRow" hidden>
+            <label for="profilePassword">Текущий пароль для смены email</label>
+            <input type="password" id="profilePassword" autocomplete="current-password">
+          </div>
+          <button class="btn btn-green" style="width:auto;" onclick="saveProfile()">Сохранить</button>
+        </div>
+
+        <div class="right card">
+          <h3>Уведомления</h3>
+          <p class="page-description">Настройки сохраняются в профиле. Рассылка пока недоступна.</p>
+          <div class="settings-row">
+            <span>Напоминания о приемах пищи</span>
+            <button type="button" class="toggle" role="switch" aria-checked="false" aria-label="Напоминания о приемах пищи" data-preference="mealReminders"></button>
+          </div>
+          <div class="settings-row">
+            <span>Еженедельный отчёт</span>
+            <button type="button" class="toggle" role="switch" aria-checked="false" aria-label="Еженедельный отчёт" data-preference="weeklyReport"></button>
+          </div>
+          <div class="settings-row">
+            <span>Советы по питанию</span>
+            <button type="button" class="toggle" role="switch" aria-checked="false" aria-label="Советы по питанию" data-preference="nutritionTips"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  
+     
+  </div>
+</div>
+
+<!-- Экраны регистрации и входа: показываются раньше основного сайта -->
+
+<div class="auth-screen" id="authRegister">
+  <div class="auth-card">
+    <div class="auth-logo">Nutri</div>
+    <h2>Регистрация</h2>
+    <p class="auth-text">Создайте аккаунт, чтобы пользоваться приложением.</p>
+
+    <div class="form-row">
+      <label>Имя</label>
+      <input type="text" id="regName" placeholder="Как вас зовут">
+    </div>
+    <div class="form-row">
+      <label>Email</label>
+      <input type="text" id="regEmail" placeholder="you@example.com">
+    </div>
+    <div class="form-row">
+      <label>Пароль</label>
+      <input type="password" id="regPassword" placeholder="Придумайте пароль">
+    </div>
+    <div class="form-row">
+      <label>Повторите пароль</label>
+      <input type="password" id="regPasswordRepeat" placeholder="Повторите пароль">
+    </div>
+    <div class="auth-error" id="regError"></div>
+    <button class="btn btn-green" onclick="registerUser()">Зарегистрироваться</button>
+    <div class="auth-switch">Уже есть аккаунт? <a href="#" onclick="showAuthScreen('login'); return false;">Войти</a></div>
+  </div>
+</div>
+
+<div class="auth-screen" id="authLogin" style="display:none;">
+  <div class="auth-card">
+    <div class="auth-logo">Nutri</div>
+    <h2>Вход</h2>
+    <p class="auth-text">Войдите в свой аккаунт, чтобы продолжить.</p>
+
+    <div class="form-row">
+      <label>Email</label>
+      <input type="text" id="loginEmail" placeholder="you@example.com">
+    </div>
+    <div class="form-row">
+      <label>Пароль</label>
+      <input type="password" id="loginPassword" placeholder="Введите пароль">
+    </div>
+    <div class="auth-error" id="loginError"></div>
+    <button class="btn btn-green" onclick="loginUser()">Войти</button>
+    <div class="auth-switch">Нет аккаунта? <a href="#" onclick="showAuthScreen('register'); return false;">Зарегистрироваться</a></div>
+  </div>
+</div>
+
+<div class="notification" id="notification" role="status"></div>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

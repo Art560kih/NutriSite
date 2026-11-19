@@ -1,0 +1,10 @@
+services:
+  nutri:
+    build: .
+    ports:
+      - "127.0.0.1:${NUTRI_PORT:-5180}:8080"
+    volumes:
+      - nutri-data:/var/lib/nutri
+
+volumes:
+  nutri-data:

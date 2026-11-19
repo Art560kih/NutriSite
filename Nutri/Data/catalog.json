@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "name": "Овсянка",
+    "category": "Крупы",
+    "calories": 342,
+    "protein": 12,
+    "fat": 6,
+    "carbs": 60
+  },
+  {
+    "id": 2,
+    "name": "Гречка",
+    "category": "Крупы",
+    "calories": 308,
+    "protein": 12,
+    "fat": 3,
+    "carbs": 57
+  },
+  {
+    "id": 3,
+    "name": "Рис бурый",
+    "category": "Крупы",
+    "calories": 337,
+    "protein": 7,
+    "fat": 3,
+    "carbs": 71
+  },
+  {
+    "id": 4,
+    "name": "Куриная грудка",
+    "category": "Мясо",
+    "calories": 165,
+    "protein": 31,
+    "fat": 4,
+    "carbs": 0
+  },
+  {
+    "id": 5,
+    "name": "Говядина постная",
+    "category": "Мясо",
+    "calories": 187,
+    "protein": 26,
+    "fat": 9,
+    "carbs": 0
+  },
+  {
+    "id": 6,
+    "name": "Лосось",
+    "category": "Мясо",
+    "calories": 208,
+    "protein": 20,
+    "fat": 13,
+    "carbs": 0
+  },
+  {
+    "id": 7,
+    "name": "Творог 5%",
+    "category": "Молочное",
+    "calories": 121,
+    "protein": 17,
+    "fat": 5,
+    "carbs": 3
+  },
+  {
+    "id": 8,
+    "name": "Йогурт натуральный",
+    "category": "Молочное",
+    "calories": 66,
+    "protein": 5,
+    "fat": 3,
+    "carbs": 4
+  },
+  {
+    "id": 9,
+    "name": "Яйцо куриное",
+    "category": "Молочное",
+    "calories": 155,
+    "protein": 13,
+    "fat": 11,
+    "carbs": 1
+  },
+  {
+    "id": 10,
+    "name": "Брокколи",
+    "category": "Овощи",
+    "calories": 34,
+    "protein": 3,
+    "fat": 0,
+    "carbs": 7
+  },
+  {
+    "id": 11,
+    "name": "Огурец",
+    "category": "Овощи",
+    "calories": 15,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 4
+  },
+  {
+    "id": 12,
+    "name": "Авокадо",
+    "category": "Овощи",
+    "calories": 160,
+    "protein": 2,
+    "fat": 15,
+    "carbs": 9
+  },
+  {
+    "id": 13,
+    "name": "Банан",
+    "category": "Фрукты",
+    "calories": 89,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 23
+  },
+  {
+    "id": 14,
+    "name": "Яблоко",
+    "category": "Фрукты",
+    "calories": 52,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 14
+  },
+  {
+    "id": 15,
+    "name": "Черника",
+    "category": "Фрукты",
+    "calories": 57,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 14
+  },
+  {
+    "id": 16,
+    "name": "Миндаль",
+    "category": "Орехи",
+    "calories": 579,
+    "protein": 21,
+    "fat": 50,
+    "carbs": 22
+  },
+  {
+    "id": 17,
+    "name": "Грецкий орех",
+    "category": "Орехи",
+    "calories": 654,
+    "protein": 15,
+    "fat": 65,
+    "carbs": 14
+  },
+  {
+    "id": 18,
+    "name": "Зелёный чай",
+    "category": "Напитки",
+    "calories": 1,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 0
+  }
+]
